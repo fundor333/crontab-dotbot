@@ -1,6 +1,6 @@
 # crontab-dotbot
 
-Plugin for [`dotbot`](https://github.com/anishathalye/dotbot) to edit and sync crontab without deleting comment or manual added cronjob, only manage dotbot cron.
+Plugin for [`dotbot`](https://github.com/anishathalye/dotbot) to edit and sync crontab without deleting or editing manual added cronjob, only manage dotbot cron.
 
 ## Installation
 
