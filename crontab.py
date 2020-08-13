@@ -39,9 +39,9 @@ class Crontab(dotbot.Plugin):
         except Exception as e:
             self._log.error(e)
         self._delete_line(self._temp_file)
-        with open(self._temp_file, "w+") as file_object:
+        with open(self._temp_file, "a") as file_object:
             for row in rows:
-                file_object.write("\n{}".format(row))
+                file_object.write("{}".format(row))
         subprocess.call(["crontab", "-r"])
         subprocess.call(["crontab", self._temp_file])
         os.remove(self._temp_file)
@@ -50,10 +50,8 @@ class Crontab(dotbot.Plugin):
         try:
             is_skipped = False
             dummy_file = original_file + '.bak'
-            with open(original_file, 'r+') as read_obj, open(dummy_file, 'w+') as write_obj:
+            with open(original_file, 'r') as read_obj, open(dummy_file, 'w+') as write_obj:
                 for line in read_obj:
-                    self._log.info(line)
-                    self._log.info(not self._comment in line)
                     if not self._comment in line:
                         write_obj.write(line)
                     else:
