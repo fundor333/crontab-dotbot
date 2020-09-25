@@ -41,7 +41,7 @@ class Crontab(dotbot.Plugin):
         self._delete_line(self._temp_file)
         with open(self._temp_file, "a") as file_object:
             for row in rows:
-                file_object.write("{}".format(row))
+                file_object.write("{}\n".format(row))
         subprocess.call(["crontab", "-r"])
         subprocess.call(["crontab", self._temp_file])
         os.remove(self._temp_file)
