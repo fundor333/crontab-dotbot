@@ -1,5 +1,6 @@
 import os
 import subprocess
+from shutil import copyfile
 
 import dotbot
 
@@ -34,16 +35,22 @@ class Crontab(dotbot.Plugin):
 
     def _read_cron_file(self, rows):
         try:
+            backup_file = self._temp_file + '.bak2'
             with open(self._temp_file, 'w+') as fout:
                 out = subprocess.call(["crontab", '-l'], stdout=fout)
+            copyfile(self._temp_file,backup_file)
         except Exception as e:
             self._log.error(e)
         self._delete_line(self._temp_file)
         with open(self._temp_file, "a") as file_object:
             for row in rows:
-                file_object.write("{}".format(row))
+                file_object.write("{}\n".format(row))
         subprocess.call(["crontab", "-r"])
-        subprocess.call(["crontab", self._temp_file])
+        exit_code = subprocess.call(["crontab", self._temp_file])
+        if exit_code != 0:
+            exit_code = subprocess.call(["crontab", backup_file])
+        if exit_code == 0:
+            os.remove(backup_file)
         os.remove(self._temp_file)
 
     def _delete_line(self, original_file):

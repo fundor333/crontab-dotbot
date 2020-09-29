@@ -13,7 +13,7 @@ git submodule add https://github.com/fundor333/crontab-dotbot.git
 2. Modify your `install` script to enable the `crontab-dotbot` plugin.
 
 ```bash
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir crontab-dotbot-c "${CONFIG}" "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir crontab-dotbot -c "${CONFIG}" "${@}"
 ```
 
 ## Usage
