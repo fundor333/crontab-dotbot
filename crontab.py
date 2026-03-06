@@ -22,8 +22,8 @@ class Crontab(dotbot.Plugin):
         try:
             cronjob_rows = []
             for entry in data:
-                row = "{} {} {}".format(
-                    entry["cron"], entry["command"], self._comment)
+                row = "{} {} {} {}".format(
+                  entry["cron"], entry["command"], "#", entry.get("comment", self._comment))
                 self._log.lowinfo("Add {}".format(row))
                 cronjob_rows.append(row)
             self._read_cron_file(cronjob_rows)

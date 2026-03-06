@@ -18,16 +18,17 @@ git submodule add https://github.com/fundor333/crontab-dotbot.git
 
 ## Usage
 
-The plugin adds one directive use with `crontab` with two keyword:
+The plugin adds one directive use with `crontab` with three keywords:
 
-- `cron`: The crontab regex 
-- `command`: The command to run
+* `cron`: The crontab regex
+* `command`: The command to run
+* `comment`: A comment to add to the line. Defaults to `#dotbot-crontab`
+
 For example:
-
-
 
 ```yaml
 - crontab:
   - cron: 0 * * * *
     command: echo "Hello world"
+    comment: outputs a hello world note
 ```
